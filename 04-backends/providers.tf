@@ -13,8 +13,6 @@ terraform {
 
   backend "s3" {
     bucket = "terraform-kong-remote-backend"
-    key    = "state.tfstate"
-    region = "ap-southeast-1"
   }
 }
 
