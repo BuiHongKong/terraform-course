@@ -9,12 +9,12 @@ terraform {
 }
 
 provider "aws" {
-  region = "eu-west-1"
+  region = "ap-southeast-1"
 }
 
 provider "aws" {
-  region = "us-east-1"
-  alias  = "us-east"
+  region = "ap-southeast-1"
+  alias  = "ap-southeast-1"
 }
 
 resource "aws_s3_bucket" "eu_west_1" {
@@ -23,5 +23,5 @@ resource "aws_s3_bucket" "eu_west_1" {
 
 resource "aws_s3_bucket" "us_east_1" {
   bucket   = "some-random-bucket-name-18736481364"
-  provider = aws.us-east
+  provider = aws.ap-southeast-1
 }
