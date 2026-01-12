@@ -2,25 +2,30 @@ locals {
   common_tags = {
     Project   = "06-resources"
     ManagedBy = "Terraform"
-    Name      = "06-resources"
-    CostCenter = "1234"
   }
 }
 
 resource "aws_vpc" "main" {
   cidr_block = "10.0.0.0/16"
-  tags       = local.common_tags
+  tags = merge(local.common_tags, {
+    Name = "06-resources"
+  })
 }
+
 
 resource "aws_subnet" "public" {
   vpc_id     = aws_vpc.main.id
   cidr_block = "10.0.0.0/24"
-  tags       = local.common_tags
+  tags = merge(local.common_tags, {
+    Name = "06-resources-main"
+  })
 }
 
 resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
-  tags   = local.common_tags
+  tags = merge(local.common_tags, {
+    Name = "06-resources-main"
+  })
 }
 
 resource "aws_route_table" "public" {
@@ -31,7 +36,9 @@ resource "aws_route_table" "public" {
     gateway_id = aws_internet_gateway.main.id
   }
 
-  tags = local.common_tags
+  tags = merge(local.common_tags, {
+    Name = "06-resources-main"
+  })
 }
 
 resource "aws_route_table_association" "public" {
